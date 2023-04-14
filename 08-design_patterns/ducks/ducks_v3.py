@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 
+# Fly Behavior classes
+
 class FlyBehavior(ABC):
     @abstractmethod
     def fly(self):
@@ -14,13 +16,10 @@ class FlyWithWings(FlyBehavior):
 
 class FlyNoWay(FlyBehavior):
     def fly(self):
-        print("Not able to fly")
+        print("No way to fly")
 
 
-class FlyAsDrone(FlyBehavior):
-    def fly(self):
-        print("Flying as drone")
-
+# Quack Behavior classes
 
 class QuackBehavior(ABC):
     @abstractmethod
@@ -43,6 +42,9 @@ class Mute(QuackBehavior):
         print("...")
 
 
+# Duck classes
+
+
 class Duck:
     def __init__(self, fly_behavior, quack_behavior):
         self.fly_behavior = fly_behavior
@@ -54,21 +56,13 @@ class Duck:
     def display(self):
         pass
 
-    def fly(self):
-        self.fly_behavior.fly()
-
-    def quack(self):
-        self.quack_behavior.quack()
-
-
 
 class RedheadDuck(Duck):
     def __init__(self):
         super().__init__(FlyWithWings(), Quack())
-
+        
     def display(self):
         print("REDHEAD")
-
 
 
 class MallardDuck(Duck):
@@ -77,7 +71,6 @@ class MallardDuck(Duck):
 
     def display(self):
         print("MALLARD")
-
 
 
 class RubberDuck(Duck):
@@ -96,20 +89,14 @@ class DecoyDuck(Duck):
         print("DECOY")
 
 
-
 if __name__ == '__main__':
     ducks = []
-    r = RubberDuck()
-    r.fly_behavior = FlyAsDrone()
-    r.quack_behavior = Mute()
-    ducks.append(RedheadDuck())
     ducks.append(MallardDuck())
-    ducks.append(r)
+    ducks.append(RedheadDuck())
+    ducks.append(RubberDuck())
     ducks.append(DecoyDuck())
 
     for duck in ducks:
         duck.display()
-        duck.quack()
-        duck.fly()
-
-
+        duck.quack_behavior.quack()
+        duck.fly_behavior.fly()

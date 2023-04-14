@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 
 
 class Duck:
@@ -9,14 +8,12 @@ class Duck:
         pass
 
 
-class Flyable(ABC):
-    @abstractmethod
+class Flyable:
     def fly(self):
         pass
 
 
-class Quackable(ABC):
-    @abstractmethod
+class Quackable:
     def quack(self):
         pass
 
@@ -26,10 +23,10 @@ class RedheadDuck(Duck, Flyable, Quackable):
         print("REDHEAD")
 
     def fly(self):
-        print("Redhead flying")
+        print("Flying ...")
 
     def quack(self):
-        print("Readhead says Quack")
+        print("Quack")
 
 
 class MallardDuck(Duck, Flyable, Quackable):
@@ -37,38 +34,35 @@ class MallardDuck(Duck, Flyable, Quackable):
         print("MALLARD")
 
     def fly(self):
-        print("Mallard flying")
+        print("Flying ...")
 
     def quack(self):
-        print("Mallard says Quack")
+        print("Quack")
 
 
 class RubberDuck(Duck, Quackable):
+    def quack(self):
+        print("Squeak")
+
     def display(self):
         print("RUBBER")
-
-    def quack(self):
-        print("Rubber says Squeak")
 
 
 class DecoyDuck(Duck):
     def display(self):
         print("DECOY")
 
-    def quack(self):
-        pass
-
 
 if __name__ == '__main__':
     ducks = []
-    ducks.append(RedheadDuck())
     ducks.append(MallardDuck())
+    ducks.append(RedheadDuck())
     ducks.append(RubberDuck())
     ducks.append(DecoyDuck())
 
     for duck in ducks:
         duck.display()
-        duck.quack()
-        duck.fly()
-
-
+        if not isinstance(duck, DecoyDuck):
+            duck.quack()
+        if isinstance(duck, MallardDuck) or isinstance(duck, RedheadDuck):
+            duck.fly()

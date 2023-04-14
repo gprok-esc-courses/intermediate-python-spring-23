@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 
 
 class Duck:
@@ -8,11 +7,11 @@ class Duck:
     def swim(self):
         print("Swimming ...")
 
-    def display(self):
-        pass
-
     def fly(self):
         print("Flying ...")
+
+    def display(self):
+        pass
 
 
 class RedheadDuck(Duck):
@@ -26,32 +25,31 @@ class MallardDuck(Duck):
 
 
 class RubberDuck(Duck):
-    def display(self):
-        print("RUBBER")
-
-    def fly(self):
-        pass
-
     def quack(self):
         print("Squeak")
 
+    def fly(self):
+        pass
+
+    def display(self):
+        print("RUBBER")
+
 
 class DecoyDuck(Duck):
-    def display(self):
-        print("DECOY")
+    def quack(self):
+        pass
 
     def fly(self):
         pass
 
-    def quack(self):
-        pass
-
+    def display(self):
+        print("DECOY")
 
 
 if __name__ == '__main__':
     ducks = []
-    ducks.append(RedheadDuck())
     ducks.append(MallardDuck())
+    ducks.append(RedheadDuck())
     ducks.append(RubberDuck())
     ducks.append(DecoyDuck())
 
@@ -59,5 +57,3 @@ if __name__ == '__main__':
         duck.display()
         duck.quack()
         duck.fly()
-
-
