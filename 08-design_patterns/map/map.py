@@ -9,17 +9,49 @@ class RouteStrategy(ABC):
 
 class ByCar(RouteStrategy):
     def get_route(self):
-        return "Path by car"
+        return "Route by car ..."
 
 
 class ByBus(RouteStrategy):
     def get_route(self):
-        return "Path by bus"
+        return "Route by bus ..."
 
 
 class Walking(RouteStrategy):
     def get_route(self):
-        return "Path walking"
+        return "Walking route"
+
+
+class ByDrone(RouteStrategy):
+    def get_route(self):
+        return "Route by drone ..."
+
+
+class Hyperloop(RouteStrategy):
+    def get_route(self):
+        return "Route by hyperloop ..."
+
+
+class RouteFactory:
+    options = {
+        1: "By Car",
+        2: "By Bus",
+        3: "Walking",
+        4: "By Drone",
+        5: "Hyperloop"
+    }
+    @staticmethod
+    def get_route_object(code):
+        if code == 1:
+            return ByCar()
+        elif code == 2:
+            return ByBus()
+        elif code == 3:
+            return Walking()
+        elif code == 4:
+            return ByDrone()
+        elif code == 5:
+            return Hyperloop()
 
 
 class Map:
@@ -37,22 +69,15 @@ class Map:
 if __name__ == '__main__':
     map = Map()
     while True:
-        print("1. By Car")
-        print("2. By Bus")
-        print("3. Walking")
+        for index in RouteFactory.options:
+            print(str(index) + ". " + RouteFactory.options[index])
         print("0. EXIT")
+
         selection = int(input("Select: "))
-        if selection == 1:
-            map.set_route_strategy(ByCar())
-        elif selection == 2:
-            map.set_route_strategy(ByBus())
-        elif selection == 3:
-            map.set_route_strategy(Walking())
-        elif selection == 0:
+
+        if selection == 0:
             break
+        else:
+            map.set_route_strategy(RouteFactory.get_route_object(selection))
+
         map.print_route()
-
-
-
-
-
